@@ -1,0 +1,12 @@
+﻿  Alien.cpp
+  Game.cpp
+  main.cpp
+  Ship.cpp
+c:\users\allou\source\repos\spaceinvaderjm\spaceinvaderjm\ship.cpp(3): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+  Génération de code en cours...
+c:\users\allou\source\repos\spaceinvaderjm\spaceinvaderjm\game.cpp(59): warning C4715: 'Game::mainloop' : les chemins de contrôle ne retournent pas tous une valeur
+  SpaceInvaderJM.vcxproj -> C:\Users\allou\source\repos\SpaceInvaderJM\Debug\SpaceInvaderJM.exe
