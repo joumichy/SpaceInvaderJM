@@ -2,6 +2,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Ship.h"
+#include "Alien.h"
+
 
 class Game
 {
@@ -15,6 +17,7 @@ public:
 private:
 
 	Ship ship;
+	Alien alien;
 	sf::RenderWindow window;
 	int w, h;
 };

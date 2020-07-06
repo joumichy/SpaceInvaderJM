@@ -1,18 +1,9 @@
 #include "Ship.h"
 
-Ship::Ship(int x, int y) : position(x, y), speed(0.0, 0.0),texture(),sprite()
+Ship::Ship(int x, int y) : position(x, y), speed(0.0, 0.0), texture(), sprite()
 {
 
-	//On Chaarge l'image
-	if (!texture.loadFromFile("./Media/Texture/spaceship.png")) {
-		std::cout << "Load Failed !" << std::endl;
-		system("pause");
-
-	}
-
-	//Appliquer l'image à la zone
-	sprite.setTexture(texture);
-	sprite.rotate(90);//Rotation horizontale
+	
 	
 }
 
@@ -36,4 +27,19 @@ void Ship::draw(sf::RenderWindow& window)
 void Ship::setSpeed(sf::Vector2f vector)
 {
 	speed = vector;
+}
+
+void Ship::setImage(const std::string& path,const std::int16_t& angle)
+{
+	//On Chaarge l'image
+	//Path : "./Media/Texture/spaceship.png"
+	if (!texture.loadFromFile(path)) {
+		std::cout << "Load Failed !" << std::endl;
+		system("pause");
+
+	}
+
+	//Appliquer l'image à la zone
+	sprite.setTexture(texture);
+	sprite.rotate(angle);//Rotation horizontale
 }

@@ -2,8 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include "Game.h"
 #include "Ship.h"
+#include "Alien.h"
 
-Game::Game(int width, int height): w(width), h(height), window(sf::VideoMode(width, height), "Game"), ship(100,height/2)
+Game::Game(int width, int height): w(width), h(height), window(sf::VideoMode(width, height), "Game"), ship(100,height/2),alien(600,height/2)
 {
 
 
@@ -13,6 +14,8 @@ int Game::mainloop()
 {
 	sf::Event events;
 	sf::Clock clock;
+	ship.setImage("./Media/Texture/spaceship.png",90);
+	alien.setImage("./Media/Texture/alienship.png",0);
 
 	if (!window.isOpen()) 
 	{
@@ -41,12 +44,15 @@ int Game::mainloop()
 		{
 			//Tous les 1/30 secondes on met à jour la position du vaisseau
 			ship.update();
+			alien.update();
 			clock.restart();
+			
 		}
 
 		//Clear Window's screen
 		window.clear(sf::Color::Black);
 		ship.draw(window);
+		alien.draw(window);
 
 		//Afficher l'ecran
 		window.display();
