@@ -1,42 +1,42 @@
-#include "Ship.h"
+#include "Entity.h"
 
-Ship::Ship(int x, int y) : position(x, y), speed(0.0, 0.0), texture(), sprite()
+Entity::Entity(int x, int y) : position(x, y), speed(0.0, 0.0), texture(), sprite()
 {
 
-	
-	
-}
 
-Ship::Ship() {
 
 }
 
-void Ship::update() 
+Entity::Entity() {
+
+}
+
+void Entity::update()
 {
 	//On met à jour la position de l'objet
 	position.x += speed.x;
 	position.y += speed.y;
 
 	sprite.setPosition(position);
-		 
+
 }
 
-void Ship::draw(sf::RenderWindow& window)
+void Entity::draw(sf::RenderWindow& window)
 {
 
 	window.draw(sprite);
 
 }
 
-void Ship::setSpeed(sf::Vector2f vector)
+void Entity::setSpeed(sf::Vector2f vector)
 {
 	speed = vector;
 }
 
-void Ship::setImage(const std::string& path,const std::int16_t& angle)
+void Entity::setImage(const std::string& path, const std::int16_t& angle)
 {
 	//On Chaarge l'image
-	//Path : "./Media/Texture/spaceship.png"
+	
 	if (!texture.loadFromFile(path)) {
 		std::cout << "Load Failed !" << std::endl;
 		system("pause");
@@ -49,24 +49,24 @@ void Ship::setImage(const std::string& path,const std::int16_t& angle)
 }
 
 
-int Ship::getX() {
+int Entity::getX() {
 	return sprite.getPosition().x;
 }
 
-int Ship::getY(){
+int Entity::getY() {
 
 	return sprite.getPosition().y;
 
 }
 
-void Ship::setPosition(sf::Vector2f position) {
+void Entity::setPosition(sf::Vector2f position) {
 
 	sprite.setPosition(position);
 
 }
 
 
-void Ship::setPositionXY(int x, int y) {
+void Entity::setPositionXY(int x, int y) {
 	position.x = x;
 	position.y = y;
 	sprite.setPosition(position);
