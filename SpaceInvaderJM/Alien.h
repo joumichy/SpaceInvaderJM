@@ -1,23 +1,30 @@
 #pragma once
-#include <iostream>
-#include <SFML/Graphics.hpp>
+#include "Entity.h"
+#include "Bullet.h"
 
-class Alien {
+class Alien : public Entity{
 
-public:
+public :
+
 	Alien(int x, int y);
 
-	void update();
-	void draw(sf::RenderWindow& window);
-	void setSpeed(sf::Vector2f vector);
+	Alien();
+
+	void movementAlea(sf::Vector2f vector);
+
+	bool checkCol(Bullet& bullet);
+
+	void setDead(bool death);
+	bool isDead();
+	
 
 
 private:
-	sf::Vector2f position;
-	sf::Vector2f speed;
 
-	sf::Texture texture;
-	sf::Sprite sprite;
+	bool dead;
+	EnemyType type = alienType;
+	
+	
 
 
 };

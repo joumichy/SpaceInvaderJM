@@ -1,28 +1,23 @@
 
-#include <SFML/Graphics.hpp>
+#include "pch.h"
+#include "Entity.h"
 #pragma once
-#include <iostream>
-#include <SFML/Graphics.hpp>
 
-class Ship {
+
+
+class Ship :public Entity {
 
 public:
 	Ship(int x, int y);
 
+	Ship();
 	
-	void update();//Mettre à jour position
-	void draw(sf::RenderWindow& window);//Afficher ) l'écran
-	void setSpeed(sf::Vector2f vector);//Mettre à jour la position
+	
+	
+	
 
+protected:
 
-private:
-
-	//Attribut
-	sf::Vector2f position;
-	sf::Vector2f speed;
-
-	sf::Texture texture;//Zone d'image
-	sf::Sprite sprite;//Image personnalisée
 
 		
 };

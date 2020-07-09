@@ -1,12 +1,22 @@
-﻿  Alien.cpp
-  Game.cpp
-  main.cpp
-  Ship.cpp
-c:\users\allou\source\repos\spaceinvaderjm\spaceinvaderjm\ship.cpp(3): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+﻿  Game.cpp
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(419): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
           with
           [
               T=float
           ]
-  Génération de code en cours...
-c:\users\allou\source\repos\spaceinvaderjm\spaceinvaderjm\game.cpp(59): warning C4715: 'Game::mainloop' : les chemins de contrôle ne retournent pas tous une valeur
-  SpaceInvaderJM.vcxproj -> C:\Users\allou\source\repos\SpaceInvaderJM\Debug\SpaceInvaderJM.exe
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(582): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(623): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(658): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(688): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(691): warning C4244: 'initialisation' : conversion de 'T' en 'int', perte possible de données
+          with
+          [
+              T=float
+          ]
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(743): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(329): warning C4715: 'Game::mainloop' : les chemins de contrôle ne retournent pas tous une valeur
+  SpaceInvaderJM.vcxproj -> C:\Users\allou\Desktop\esgiWork\cplusplus\pa\SpaceInvaderJM\Debug\SpaceInvaderJM.exe
