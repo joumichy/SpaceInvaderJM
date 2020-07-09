@@ -1,33 +1,18 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include <stdlib.h>  
+#include "pch.h"
 #include "Game.h"
 #include "Ship.h"
 #include "Alien.h"
 #include "Wall.h"
 #include "Bullet.h"
-#include <vector>
-#include <chrono>
-#include <thread>
-#include <string> 
 
-#define WIDTH 1000
-#define HEIGHT 600
-#define MAX_WIDTH 1000
-#define MAX_HEIGHT 600
-#define MIN_WIDTH 0
-#define MIN_HEIGHT 0
-#define SPEED 5.0
-#define TAB_X 20
-#define TAB_Y 20
-#define START_X 50
-#define START_Y 300
 
 Game::Game(int width, int height) : w(WIDTH), h(HEIGHT), window(sf::VideoMode(WIDTH, HEIGHT), "Game"), ship(START_X, HEIGHT / 2), alien(600, HEIGHT / 2), listAlien()
 {
 
 
 }
+
+
 
 
 
@@ -49,8 +34,10 @@ int Game::mainloop()
 	sf::Clock clock;
 	sf::Clock clockMove;
 	sf::Clock clockAlienGenerator;
-	sf::Clock clockWallGenerator;
 	sf::Clock clockAlienShot;
+	sf::Clock clockExplosion;
+	sf::Time time;
+	time = clockExplosion.getElapsedTime();
 	
 
 	sf::Font font;
@@ -70,6 +57,14 @@ int Game::mainloop()
 	livesText.setPosition(10.f, 120.f);
 	livesText.setCharacterSize(20);
 	livesText.setString(std::to_string(lives));
+
+
+
+	gameOverText.setFillColor(sf::Color::Green);
+	gameOverText.setFont(font);
+	gameOverText.setPosition(WIDTH/3, HEIGHT/3);
+	gameOverText.setCharacterSize(50);
+	gameOverText.setString(std::to_string(lives));
 	
 	//Define Object
 	//std::vector<Alien> listAlien;
@@ -92,14 +87,39 @@ int Game::mainloop()
 	newListWall.resize(4);
 	allListAlien.resize(TAB_Y);
 	
+
+	
 	//initListWalls(listWall);
 
 	
 	//Set Object
-	ship.setImage("./Media/Texture/spaceship.png",90);
+	
+	//ship.setImage("./Media/Texture/spaceship.png",90);
 
 	const std::string alienImagePath = "./Media/Texture/alienship.png";
 	const std::string wallImagePath = "./Media/Texture/wall.png";
+	const std::string shipImagePath  = "./Media/Texture/spaceship.png";
+	const std::string exploisionImagePath = "./Media/Texture/explosion.png";
+	const std::string backgroundImagePath = "./Media/Texture/background.png";
+
+	
+	//Image explosion
+	if (!imageExplosion.loadFromFile(exploisionImagePath)) {
+
+		std::cout << "Erreur chargement Explosion Image!" << std::endl;
+	}
+	imageExplosion.createMaskFromColor(sf::Color::White);
+	textureExplosion.loadFromImage(imageExplosion);
+
+
+	//image background
+	if (!textureBackGround.loadFromFile(backgroundImagePath)) {
+
+		std::cout << "Erreur chargement Background Image!" << std::endl;
+	}
+	
+	
+	textureBackGround.loadFromFile(backgroundImagePath);
 	
 
 	
@@ -114,125 +134,190 @@ int Game::mainloop()
 		return EXIT_FAILURE;
 
 	}
+	initShip(textureShip, shipImagePath);
+	sf::Sprite spriteBackground;
+	textureBackGround.setRepeated(true);
+	spriteBackground.setTextureRect(sf::IntRect(0, 0, 1000, 600));
+	//spriteBackground.setPosition(200, 200);
+	spriteBackground.setTexture(textureBackGround);
+
+	
+
+	window.setFramerateLimit(60);
+	
 
 	while (window.isOpen())
 		//Tant que l'ecran est actif
 	{
-		if (gameOver) {
-			std::cout << "PARTIE TERMINEE !" << std::endl;
-		}
-		while (window.pollEvent(events))
-		{
-			//On traite ici tous les events
-			if (events.type == sf::Event::EventType::Closed)
+		if (!gameOver) {
+			
+
+			while (window.pollEvent(events))
 			{
-				//Arret écran
-				window.close();
+				//On traite ici tous les events
+				if (events.type == sf::Event::EventType::Closed)
+				{
+					//Arret écran
+					window.close();
+				}
 			}
-		}
 
 
 
-		//Gestion des evenements
-		
-		window.clear(sf::Color::Black);
-		if (clock.getElapsedTime().asSeconds() > 1.0 / 30.0)
-		{
-			//Tous les 1/30 secondes on met à jour la position du vaisseau
-			ship.update();
-			clock.restart();
+			//Gestion des evenements
+
+			window.clear(sf::Color::Black);
 			
-		}
-		if (clockAlienShot.getElapsedTime().asSeconds() > 1)
-		{
-			//rand shot
-			int prob = rand() % 100 + 1;
-			alienShoot(aliens,alienBulletVector);
-			clockAlienShot.restart();
-
-		}
-
-		if (clockMove.getElapsedTime().asSeconds() > 0.2)
-		{
-			//Tous les 1/30 secondes on met à jour la position du vaisseau
-
-			moveAliens(aliens);
-			moveWalls(walls);
-
-			//moveAliens(newListAlien);
-			//moveWalls(listWall);
-			//moveWalls(newListWall);
-			clockMove.restart();
-
-
-		}
-
-
-		if (clockWallGenerator.getElapsedTime().asSeconds() > 5)
-		{
-			
-			//initListWalls(newListWall);
-			//allListWalls.push_back(newListWall);
-			clockWallGenerator.restart();
-
-		
-
-
-		}
-
-		if (clockAlienGenerator.getElapsedTime().asSeconds() > 3)
-		{
-			
-			int WallOrAlien = rand()%100 + 1;
-
-			if (WallOrAlien < 50) {
-				initListAliens(newListAlien, textureAlien, alienImagePath);
-				//initListWalls(newListWall, textureWall, wallImagePath);
-
-			}
-			else
+			if (clock.getElapsedTime().asSeconds() > 1.0 / 30.0)
 			{
-				//initListAliens(newListAlien, textureAlien, alienImagePath);
-				initListWalls(newListWall, textureWall, wallImagePath);
+				//Tous les 1/30 secondes on met à jour la position du vaisseau
+				ship.update();
+				clock.restart();
+
 			}
+			if (clockAlienShot.getElapsedTime().asSeconds() > 1)
+			{
+				//rand shot
+				int prob = rand() % 100 + 1;
+				alienShoot(aliens, alienBulletVector);
+				clockAlienShot.restart();
+
+			}
+
+			if (clockMove.getElapsedTime().asSeconds() > 0.2)
+			{
+				//Tous les 1/30 secondes on met à jour la position du vaisseau
+
+				moveAliens(aliens);
+				//aleaAliensMove(aliens);
+				moveWalls(walls);
+
+				//moveAliens(newListAlien);
+				//moveWalls(listWall);
+				//moveWalls(newListWall);
+				clockMove.restart();
+
+
+			}
+
+
+			if (clockAlienGenerator.getElapsedTime().asSeconds() > 5)
+			{
+
+				int WallOrAlien = rand() % 100 + 1;
+
+				if (WallOrAlien < 50) {
+					initListAliens(newListAlien, textureAlien, alienImagePath);
+
+				}
+				else
+				{
+					initListWalls(newListWall, textureWall, wallImagePath);
+				}
+
+				clockAlienGenerator.restart();
+
+
+
+
+
+			}
+			//Clear Window's screen
+
+
+			window.draw(spriteBackground);
+			eventHandler(events, bulletVector,
+				alien, listAlien, walls,
+				ship, allListAlien,
+				newListAlien, alienBulletVector);
+
+			//Show First Alien Colonne
 			
-			clockAlienGenerator.restart();
-			
-			
+			for (unsigned int i = 0; i < aliens.size(); i++) {
+				aliens[i].draw(window);
+
+			}
+
+			if (clockExplosion.getElapsedTime().asSeconds() > 2) {
+
+				for (unsigned int i = 0; i < aliens.size(); i++) {
+
+					if (aliens[i].isDead()) {
+
+						aliens.erase(aliens.begin() + i);
+					}
+
+				}
+				clockExplosion.restart();
+
+			}
+
+
+			for (unsigned int i = 0; i < aliens.size(); i++) {
+				if (aliens[i].isDead()) {
+
+
+
+					//std::chrono::seconds interval(2);
+					//std::this_thread::sleep_for(interval);
+					//aliens.erase(aliens.begin() + i);
+
+				}
+
+			}
+
+
+
+			for (unsigned int i = 0; i < aliens.size(); i++) {
+				if (aliens[i].isDead()) {
+
+					//aliens[i].setNewTexture(textureExplosion);
+					sf::Sprite sprite;
+					sprite = aliens[i].getSprite();
+					sprite.setTexture(textureExplosion);
+
+					aliens[i].setSpriteFromSprite(sprite);
+
+
+
+					//aliens.erase(aliens.begin() + i);
+					clockExplosion.restart();
+
+
+				}
+
+			}
+
+			//Show Wall
+			for (unsigned int i = 0; i < walls.size(); i++) {
+				walls[i].draw(window);
+			}
+			updateText();
 
 			
+			ship.draw(window);
+			
+			window.draw(scoreText);
+			window.draw(livesText);
+			//
 
+			window.display();
+
+
+
+			//Affcher l'ecran
 		}
-		//Clear Window's screen
-		
-		
-		
-		eventHandler(events, bulletVector,
-			alien, listAlien, walls,
-			ship, allListAlien,
-			newListAlien,alienBulletVector);
+		else {
+		//std::cout << "PARTIE TERMINEE !" << std::endl;
 
-		//Show First Alien Colonne
-		
-		for (unsigned int i = 0; i < aliens.size(); i++) {
-			aliens[i].draw(window);
-			
-		}
-
-		//Show Wall
-		for (unsigned int i = 0; i < walls.size(); i++) {
-			walls[i].draw(window);
-		}
-		updateText();
-		ship.draw(window);
-	
-		window.draw(scoreText);
-		window.draw(livesText);
+		std::string stringLives = "GAME OVER \n Score: " + std::to_string(score);
+		gameOverText.setString(stringLives);
+		window.clear();
+		window.draw(gameOverText);
 		window.display();
 
-
-
-		//Affcher l'ecran
+		}
+		
 		
 		
 	}
@@ -312,28 +397,35 @@ void Game::eventHandler(sf::Event events,
 
 
 	//Shooting
-	
+
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 
-	
 			isShooting = true;
+			
 			//std::cout << "Shoot !" << std::endl;
-
+			
 	}
 	
 	
 	
-	window.clear();
+	
+	
 	if (isShooting == true) {
 		
-		//std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
+		
 		Bullet newBullet(sf::Vector2f(10, 5));
-		newBullet.setPos(sf::Vector2f(ship.getX(), ship.getY()));
-		
+		newBullet.setPos(sf::Vector2f(ship.getX(), ship.getY()+20));
+
 		bulletVector.push_back(newBullet);
-		
 		isShooting = false;
+			
+		
+		//std::this_thread::sleep_for(std::chrono::milliseconds(10));
+		
+		
+		
 		
 
 	}
@@ -345,7 +437,8 @@ void Game::eventHandler(sf::Event events,
 		
 		bulletVector[i].draw(window);
 	
-		bulletVector[i].fire(1);
+		bulletVector[i].fire(5);
+		
 	 
 		
 	}
@@ -357,7 +450,7 @@ void Game::eventHandler(sf::Event events,
 		
 		alienBulletVector[i].draw(window);
 	
-		alienBulletVector[i].fire(-1);
+		alienBulletVector[i].fire(-5);
 	 
 		
 	}
@@ -370,8 +463,8 @@ void Game::eventHandler(sf::Event events,
 
 	
 				alienBulletVector.erase(alienBulletVector.begin() + i);
-				//lives -= 1;
-				//ship.setPositionXY(START_X, START_Y);
+				lives -= 1;
+				ship.setPositionXY(START_X, START_Y);
 
 		};
 
@@ -387,12 +480,19 @@ void Game::eventHandler(sf::Event events,
 
 			
 				//Kill Alien
-				//listAlien.erase(listAlien.begin() + elem);
+				
 
 				//Destroy bullet
 				//bulletVector.erase(bulletVector.begin() + i);
 				if (aliens[elem].isDead()) {
+
+
+					//aliens[elem].setNewTexture(textureExplosion);
+					
+
 					aliens.erase(aliens.begin() + elem);
+						
+				
 					bulletVector.erase(bulletVector.begin() + i);
 					score += 100;
 				}
@@ -433,7 +533,31 @@ void Game::eventHandler(sf::Event events,
 			//ship.restart();
 		}
 	}
+	
+	
+	/*for (Entity enemy : entitiesEnemy) {
+		
+		if (enemy.getType() == 1) {
 
+			Alien* alien = (Alien *)& enemy;
+			sf::Sprite sprite = alien->getSprite();
+			if (sprite.getGlobalBounds().intersects(ship.getSprite().getGlobalBounds())) {
+				lives -= 1;
+				ship.setPositionXY(START_X, START_Y);
+				if (lives == 0) {
+
+
+					setGameOver(true);
+				}
+		}
+		
+
+			//ship.restart();
+		}
+	}*/
+	
+	
+	
 	for (Wall wall : walls) {
 
 		if (wall.getSprite().getGlobalBounds().intersects(ship.getSprite().getGlobalBounds())) {
@@ -453,21 +577,69 @@ void Game::eventHandler(sf::Event events,
 	
 	
 }
+void Game::aleaAliensMove(std::vector<Alien>& listAlien) {
+	//for(alien)
+	for (int i = 0; i < listAlien.size(); i++) {
 
-void Game::moveAliens(std::vector<Alien>& listAlien) {
+		int movement = rand() % 100 + 1;
+		double height = (double)MAX_HEIGHT;
+		double test = (double)70 / 100;
+		//std::cout << test <<std::endl;
+
+		if (movement <= 33) {
+			if ((double)listAlien[i].getY() < height *(double)(70 / 100)) {
+				listAlien[i].setSpeed(sf::Vector2f(0, SPEED));
+				listAlien[i].update();
+			}
+			else if ((double)listAlien[i].getY() < height *(double)( 70/ 100))  {
+				listAlien[i].setSpeed(sf::Vector2f(0, -SPEED));
+				listAlien[i].update();
+			}
+			
+		}
+		else if (movement > 33 && movement <= 66) {
+
+			if ((double)listAlien[i].getY() < height *(double)(70 / 100)) {
+				listAlien[i].setSpeed(sf::Vector2f(SPEED, SPEED));
+				listAlien[i].update();
+			}
+			else {
+				listAlien[i].setSpeed(sf::Vector2f(SPEED, -SPEED));
+				listAlien[i].update();
+			}
+			
+		}
+		else {
+			listAlien[i].setSpeed(sf::Vector2f(-SPEED*2, 0));
+			listAlien[i].update();
+		}
 
 	
-	for (unsigned int i = 0; i < listAlien.size(); i++) {
-
-		int x = listAlien[i].getX();
-		int y = listAlien[i].getY();
-		x -= SPEED;
-		//ADD Top/Down move
-		listAlien[i].setPositionXY(x, y);
 	}
 
 }
+void Game::moveAliens(std::vector<Alien>& listAlien) {
 
+	for (int i = 0; i < listAlien.size(); i ++) {
+		listAlien[i].setSpeed(sf::Vector2f(-SPEED,0));
+		listAlien[i].update();
+	}
+	
+}
+void Game::initShip(sf::Texture& textureShip, std::string shipImagePath) {
+
+	
+	if (!textureShip.loadFromFile(shipImagePath)) {
+		std::cout << "Erreur image ship " << std::endl;
+	}
+	
+	sf::Sprite spriteShip;
+	spriteShip.setTexture(textureShip);
+	spriteShip.rotate(90);
+
+	ship.setSpriteFromSprite(spriteShip);
+	ship.setPositionXY(START_X, HEIGHT / 2);
+}
 void Game::initListAliens(std::vector<Alien> &listAlien,sf::Texture& texture, std::string alienImagePath) {
 
 	if (!texture.loadFromFile(alienImagePath)) {
@@ -479,6 +651,8 @@ void Game::initListAliens(std::vector<Alien> &listAlien,sf::Texture& texture, st
 	sf::Sprite sprite;
 	
 	sprite.setTexture(texture);
+	EnemyType type;
+	type = alienType;
 	int numberOfAliens = rand() % 4 + 1;
 	int positionOfAliens = rand() % 10 + 1;
 	for (unsigned int i = 0; i < numberOfAliens; i++) {
@@ -486,22 +660,28 @@ void Game::initListAliens(std::vector<Alien> &listAlien,sf::Texture& texture, st
 		
 		alien.setSpriteFromSprite(sprite);
 		alien.setPositionXY(MAX_WIDTH, positionOfAliens*10 + (i * 100));
-
+	
+		alien.setType(type);
 		aliens.push_back(alien);
+		entitiesEnemy.push_back(alien);
 	}
 
 };
 
 void Game::initListWalls(std::vector<Wall>& listWall, sf::Texture& texture,std::string wallImagePath) {
 
-	if (!texture.loadFromFile(wallImagePath)) {
-		std::cout << "Erreur image " << std::endl;
-		system("pause");
+	//image Wall
+	if (!imageWall.loadFromFile(wallImagePath)) {
+
+		std::cout << "Erreur chargement Wall Image!" << std::endl;
 	}
+	imageWall.createMaskFromColor(sf::Color::White);
+	textureWall.loadFromImage(imageWall);
 
 
 	sf::Sprite sprite;
-
+	EnemyType type;
+	type = wallType;
 	sprite.setTexture(texture);
 	int numberOfWall = rand() % 4 + 1;
 	int positionOfWall = rand() % 10 + 1;
@@ -511,7 +691,9 @@ void Game::initListWalls(std::vector<Wall>& listWall, sf::Texture& texture,std::
 		int wallLength = wall.getSprite().getGlobalBounds().width;
 		wall.setSpriteFromSprite(sprite);
 		wall.setPositionXY(MAX_WIDTH, positionOfWall + i*wallLength);
+		wall.setType(type);
 		walls.push_back(wall);
+		entitiesEnemy.push_back(wall);
 		
 	}
 

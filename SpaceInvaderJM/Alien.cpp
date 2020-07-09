@@ -1,30 +1,16 @@
 #include "Alien.h"
 
-Alien::Alien() :Ship() {
+Alien::Alien() {
 	dead = false;
-	//setImage("./Media/Texture/alienship.png", 0);
 };
 
-Alien::Alien(int x, int y) :Ship() {
-	//setImage("./Media/Texture/alienship.png", 0);
-};
-
-Alien::Alien(sf::Texture texture) {
+Alien::Alien(int x, int y) :Entity() {
 	dead = false;
-	setImageFromTexture(texture, 0);
 };
 
-bool Alien::checkCol(Bullet& bullet) {
 
-	/*if (bullet.getRight() > getX() &&
-		bullet.getTop() < getY() + 50 &&
-		bullet.getDown() > getY())
-	{
-		//bullet.setPos(sf::Vector2f(5000000, 5000000));
-		//sprite.setPosition(sf::Vector2f(100000, 10000));
-		return true;
-	}
-	return false;*/
+bool Alien::checkCol(Bullet& bullet) 
+{
 
 	sf::RectangleShape bulletShape;
 	bulletShape = bullet.getShape();
@@ -36,7 +22,7 @@ bool Alien::checkCol(Bullet& bullet) {
 	return false;
 }
 
-void Alien::movement(sf::Vector2f vector) {
+void Alien::movementAlea(sf::Vector2f vector) {
 	
 }
 

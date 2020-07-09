@@ -1,10 +1,13 @@
 
-#include <SFML/Graphics.hpp>
+#include "pch.h"
 #pragma once
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include <string>
 
+
+enum EnemyType {
+
+	alienType = 1,
+	wallType = 2,
+};
 class Entity {
 
 public:
@@ -23,6 +26,10 @@ public:
 	void setSpriteFromSprite(sf::Sprite mysprite);
 	sf::Sprite getSprite();
 
+	EnemyType getType();
+	void setNewTexture(sf::Texture texture);
+	void setType(EnemyType type);
+
 
 	int getX();
 	int getY();
@@ -35,6 +42,8 @@ protected:
 	sf::Vector2f speed;
 	sf::Texture texture;//Zone d'image
 	sf::Sprite sprite;//Image personnalisée
+	EnemyType type;
+	
 
 
 };

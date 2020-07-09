@@ -19,4 +19,6 @@ public:
 private:
 	std::string path = "./Media/Texture/wall.png";
 	sf::Vector2f size;
+
+	EnemyType type = wallType;
 };

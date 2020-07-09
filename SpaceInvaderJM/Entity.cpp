@@ -11,6 +11,14 @@ Entity::Entity() {
 
 }
 
+EnemyType Entity:: getType() {
+	return type;
+}
+
+void Entity:: setType(EnemyType mytype) {
+	this->type = mytype;
+}
+
 void Entity::update()
 {
 	//On met à jour la position de l'objet
@@ -77,7 +85,7 @@ void Entity::setSpriteFromSprite(sf::Sprite mysprite)
 {
 
 	//Appliquer l'image à la zone
-	sprite = mysprite;
+	this->sprite = mysprite;
 
 }
 
@@ -85,3 +93,9 @@ sf::Sprite Entity:: getSprite() {
 
 	return sprite;
 }
+
+void Entity::setNewTexture(sf::Texture texture) {
+
+	sprite.setTexture(texture);
+}
+

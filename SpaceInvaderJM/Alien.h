@@ -1,10 +1,8 @@
 #pragma once
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include "Ship.h"
+#include "Entity.h"
 #include "Bullet.h"
 
-class Alien : public Ship{
+class Alien : public Entity{
 
 public :
 
@@ -12,9 +10,7 @@ public :
 
 	Alien();
 
-	Alien(sf::Texture texture);
-
-	void movement(sf::Vector2f vector);
+	void movementAlea(sf::Vector2f vector);
 
 	bool checkCol(Bullet& bullet);
 
@@ -26,6 +22,7 @@ public :
 private:
 
 	bool dead;
+	EnemyType type = alienType;
 	
 	
 

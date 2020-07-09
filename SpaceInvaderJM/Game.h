@@ -1,10 +1,9 @@
 #pragma once
-#include <iostream>
-#include <SFML/Graphics.hpp>
+#include "pch.h"
 #include "Ship.h"
 #include "Alien.h"
 #include "Wall.h"
-#include <list>
+
 
 
 
@@ -28,6 +27,9 @@ public:
 	//Alien Gestion
 	void initListAliens(std::vector<Alien>& listAlien, sf::Texture& texture, std::string alienImagePath);
 	void moveAliens(std::vector<Alien>& listAlien);
+	void aleaAliensMove(std::vector<Alien>& listAlien);
+
+	
 
 	//Wall Gestion
 	void initListWalls(std::vector<Wall>& listWall, sf::Texture& texture, std::string wallImagePath);
@@ -39,6 +41,8 @@ public:
 	//TextGestion
 
 	void updateText();
+	void initShip(sf::Texture& texture, std::string wallImagePath);
+
 
 private:
 
@@ -56,17 +60,23 @@ private:
 	std::vector<Alien> listAlien;
 	std::vector<Alien> aliens;
 	std::vector<Wall> walls;
-	
+	std::vector<Entity> entitiesEnemy;
 
+	sf::Texture textureShip;
 	sf::Texture textureAlien;
-	sf::Sprite spriteAlien;
-
 	sf::Texture textureWall;
-	sf::Sprite spriteWall;
+	sf::Texture textureExplosion;
+	sf::Texture textureBackGround;
+
+	sf::Image imageExplosion;
+	sf::Image imageWall;
+	
 
 
 	sf::Text scoreText;
 	sf::Text livesText;
+	sf::Text gameOverText;
+
 
 
 

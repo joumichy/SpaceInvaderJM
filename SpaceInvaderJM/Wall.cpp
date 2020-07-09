@@ -2,14 +2,11 @@
 
 
 Wall::Wall(int x, int y) :Entity() {
-	std::string path = "./Media/Texture/wall.png";
-	setImage(path, 0);
-	setPositionXY(x, y);
+
 }
 
 Wall::Wall():Entity() {
-	std::string path = "./Media/Texture/wall.png";
-	setImage(path, 0);
+
 }
 void Wall ::setSize(sf::Vector2f size) {
 	
