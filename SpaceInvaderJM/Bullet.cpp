@@ -8,6 +8,14 @@ Bullet::Bullet(sf::Vector2f size) {
 	
 }
 
+Bullet::Bullet(sf::Vector2f size, sf::Color color) {
+
+	bullet.setSize(size);
+	bullet.setFillColor(color);
+
+}
+
+
 void Bullet::fire(int speed) {
 
 	bullet.move(speed, 0);
@@ -28,6 +36,10 @@ int Bullet::getLeft() {
 	return bullet.getPosition().x;
 }
 
+sf::RectangleShape Bullet::getShape() {
+	return bullet;
+}
+
 int  Bullet::getRight() {
 	return bullet.getPosition().x + bullet.getSize().x;
 }
@@ -38,4 +50,12 @@ int  Bullet::getTop() {
 }
 int  Bullet::getDown() {
 	return bullet.getPosition().y + bullet.getSize().y;
+}
+void Bullet::setToAlienBullet(bool bullet) {
+	shipBullet = false;
+}
+
+bool Bullet::isShipBullet() {
+
+	return shipBullet;
 }

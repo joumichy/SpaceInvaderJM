@@ -20,6 +20,8 @@ public:
 
 	void setPosition(sf::Vector2f position);
 	void setPositionXY(int x, int y);
+	void setSpriteFromSprite(sf::Sprite mysprite);
+	sf::Sprite getSprite();
 
 
 	int getX();

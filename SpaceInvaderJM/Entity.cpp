@@ -72,3 +72,16 @@ void Entity::setPositionXY(int x, int y) {
 	sprite.setPosition(position);
 
 }
+
+void Entity::setSpriteFromSprite(sf::Sprite mysprite)
+{
+
+	//Appliquer l'image à la zone
+	sprite = mysprite;
+
+}
+
+sf::Sprite Entity:: getSprite() {
+
+	return sprite;
+}

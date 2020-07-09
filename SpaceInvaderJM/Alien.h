@@ -8,23 +8,24 @@ class Alien : public Ship{
 
 public :
 
-	Alien(int x, int y) :Ship(x, y){
+	Alien(int x, int y);
 
-		setImage("./Media/Texture/alienship.png", 0);
+	Alien();
 
-	}
+	Alien(sf::Texture texture);
 
-	Alien():Ship() {
-
-	}
 	void movement(sf::Vector2f vector);
 
-	void checkCol(Bullet bullet);
+	bool checkCol(Bullet& bullet);
+
+	void setDead(bool death);
+	bool isDead();
+	
 
 
 private:
 
-
+	bool dead;
 	
 	
 
