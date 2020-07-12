@@ -1,22 +1,24 @@
 ﻿  Game.cpp
-c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(419): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(385): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
           with
           [
               T=float
           ]
-c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(582): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(623): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(658): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(688): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(691): warning C4244: 'initialisation' : conversion de 'T' en 'int', perte possible de données
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(540): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(583): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(642): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(672): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(675): warning C4244: 'initialisation' : conversion de 'T' en 'int', perte possible de données
           with
           [
               T=float
           ]
-c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(743): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(717): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
           with
           [
               T=float
           ]
-c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(329): warning C4715: 'Game::mainloop' : les chemins de contrôle ne retournent pas tous une valeur
+  main.cpp
+  Génération de code en cours...
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(298): warning C4715: 'Game::mainloop' : les chemins de contrôle ne retournent pas tous une valeur
   SpaceInvaderJM.vcxproj -> C:\Users\allou\Desktop\esgiWork\cplusplus\pa\SpaceInvaderJM\Debug\SpaceInvaderJM.exe

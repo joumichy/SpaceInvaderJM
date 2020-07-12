@@ -16,25 +16,21 @@ public:
 	int mainloop();
 	void eventHandler(sf::Event events,
 		std::vector<Bullet>& bulletVector,
-		Alien& alien,
-		std::vector<Alien>& listAlien,
-		std::vector<Wall>& listWall,
-		Ship& ship,
-		std::vector<std::vector<Alien>>& allListAlien,
-		std::vector<Alien>& newlistAlien,
-		std::vector<Bullet>& alienBulletVector);
+		std::vector<Bullet>& alienBulletVector,
+		std::vector<Alien>& aliens,
+		std::vector<Wall>& walls,
+		Ship& ship
+		);
 	
 	//Alien Gestion
 	void initListAliens(std::vector<Alien>& listAlien, sf::Texture& texture, std::string alienImagePath);
 	void moveAliens(std::vector<Alien>& listAlien);
 	void aleaAliensMove(std::vector<Alien>& listAlien);
 
-	
 
 	//Wall Gestion
 	void initListWalls(std::vector<Wall>& listWall, sf::Texture& texture, std::string wallImagePath);
 	void moveWalls(std::vector<Wall>& listWall);
-	void gameInit(sf::Text& livesText);
 	bool isGameOver();
 	void setGameOver(bool gameover);
 	void alienShoot(std::vector<Alien>& aliens, std::vector<Bullet>& alienBullet );
@@ -76,6 +72,10 @@ private:
 	sf::Text scoreText;
 	sf::Text livesText;
 	sf::Text gameOverText;
+
+	EnemyType typeAlien = alienType;
+	EnemyType typeWall = wallType;
+
 
 
 

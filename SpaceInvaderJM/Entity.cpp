@@ -89,10 +89,12 @@ void Entity::setSpriteFromSprite(sf::Sprite mysprite)
 
 }
 
+
 sf::Sprite Entity:: getSprite() {
 
 	return sprite;
 }
+
 
 void Entity::setNewTexture(sf::Texture texture) {
 
