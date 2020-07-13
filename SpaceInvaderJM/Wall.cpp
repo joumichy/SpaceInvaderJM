@@ -15,18 +15,4 @@ void Wall ::setSize(sf::Vector2f size) {
 }
 
 
-bool Wall::checkCollisionBullet(Bullet& bullet) {
-
-
-	if (bullet.getRight() > getX() &&
-		bullet.getTop() < getY() + 50 &&
-		bullet.getDown() > getY())
-	{
-	
-		return true;
-
-	}
-	return false;
-}
-
 

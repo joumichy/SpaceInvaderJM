@@ -2,6 +2,8 @@
 #include "Entity.h"
 #include "Bullet.h"
 
+
+//Alien Ship 
 class Alien : public Entity{
 
 public :

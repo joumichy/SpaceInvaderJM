@@ -7,6 +7,18 @@ Entity::Entity(int x, int y) : position(x, y), speed(0.0, 0.0), texture(), sprit
 
 }
 
+bool Entity:: checkCollisionBullet(Bullet& bullet) {
+	
+	sf::RectangleShape bulletShape;
+	bulletShape = bullet.getShape();
+	//Si la balle entre en collision avec le vaisseau du joueur
+	if (bulletShape.getGlobalBounds().intersects(sprite.getGlobalBounds())) {
+		return true;
+	}
+	return false;
+
+}
+
 Entity::Entity() {
 
 }
@@ -89,10 +101,12 @@ void Entity::setSpriteFromSprite(sf::Sprite mysprite)
 
 }
 
+
 sf::Sprite Entity:: getSprite() {
 
 	return sprite;
 }
+
 
 void Entity::setNewTexture(sf::Texture texture) {
 

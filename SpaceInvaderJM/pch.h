@@ -12,6 +12,8 @@
 #define TAB_Y 20
 #define START_X 50
 #define START_Y 300
+#define PROB_SHOOT 20
+#define PADDING_Y  100
 
 
 #include <stdlib.h>  
