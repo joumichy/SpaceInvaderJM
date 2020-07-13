@@ -13,9 +13,6 @@ public:
 	Ship();
 	
 	
-	
-	
-
 protected:
 
 

@@ -1,5 +1,6 @@
 
 #include "pch.h"
+#include "Bullet.h"
 #pragma once
 
 
@@ -29,6 +30,8 @@ public:
 	EnemyType getType();
 	void setNewTexture(sf::Texture texture);
 	void setType(EnemyType type);
+	bool checkCollisionBullet(Bullet& bullet);
+
 
 
 	int getX();

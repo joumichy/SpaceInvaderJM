@@ -21,24 +21,29 @@ public:
 		std::vector<Wall>& walls,
 		Ship& ship
 		);
+	void eventHandlerPLayerShooting(sf::Event events,
+		std::vector<Bullet>& bulletVector
+	);
 	
 	//Alien Gestion
 	void initListAliens(std::vector<Alien>& listAlien, sf::Texture& texture, std::string alienImagePath);
-	void moveAliens(std::vector<Alien>& listAlien);
+	
 	void aleaAliensMove(std::vector<Alien>& listAlien);
-
+	void alienShoot(std::vector<Alien>& aliens, std::vector<Bullet>& alienBullet);
 
 	//Wall Gestion
 	void initListWalls(std::vector<Wall>& listWall, sf::Texture& texture, std::string wallImagePath);
-	void moveWalls(std::vector<Wall>& listWall);
+	
 	bool isGameOver();
 	void setGameOver(bool gameover);
-	void alienShoot(std::vector<Alien>& aliens, std::vector<Bullet>& alienBullet );
+
 	//TextGestion
 
 	void updateText();
 	void initShip(sf::Texture& texture, std::string wallImagePath);
 
+	//Enemy Gestion :
+	void moveEnemy(std::vector<Entity>& enemyEntity);
 
 private:
 
@@ -53,7 +58,6 @@ private:
 	bool gameOver = false;
 
 	//Event Object
-	std::vector<Alien> listAlien;
 	std::vector<Alien> aliens;
 	std::vector<Wall> walls;
 	std::vector<Entity> entitiesEnemy;
@@ -66,7 +70,8 @@ private:
 
 	sf::Image imageExplosion;
 	sf::Image imageWall;
-	
+	sf::Image imageShip;
+
 
 
 	sf::Text scoreText;
