@@ -84,8 +84,8 @@ int Game::mainloop()
 	const std::string alienImagePath3 = "./Media/Texture/alienship3.png";
 	const std::string alienImagePath4 = "./Media/Texture/alienship4.png";
 
-	const std::string wallImagePath = "./Media/Texture/wall2.png";
-	const std::string shipImagePath  = "./Media/Texture/spaceship2.png";
+	const std::string wallImagePath = "./Media/Texture/wall.png";
+	const std::string shipImagePath  = "./Media/Texture/spaceship.png";
 	const std::string exploisionImagePath = "./Media/Texture/explosion.png";
 	const std::string backgroundImagePath = "./Media/Texture/background.png";
 
@@ -428,7 +428,7 @@ void Game::eventHandler(sf::Event events,
 		
 		alienBulletVector[i].draw(window);
 	
-		alienBulletVector[i].fire(-7);
+		alienBulletVector[i].fire(-5);
 	 
 
 	}
@@ -589,22 +589,6 @@ void Game::initListAliens(std::vector<Alien> &listAlien,sf::Texture& texture, st
 
 		std::cout << "Erreur chargement Wall Image!" << std::endl;
 	}*/
-
-	int imageAlea = rand() % 4 + 1;
-	{
-		if (imageAlea == 1) {
-		
-		}
-		else if (imageAlea == 2) {
-			imageAlien = imageAlien2;
-		}
-		else if (imageAlea == 3) {
-			imageAlien = imageAlien3;
-		}
-		else if (imageAlea == 4) {
-			imageAlien = imageAlien4;
-		}
-	}
 	imageAlien.createMaskFromColor(sf::Color::White);
 	texture.loadFromImage(imageAlien);
 	

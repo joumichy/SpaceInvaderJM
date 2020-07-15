@@ -10,14 +10,14 @@ c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.
               T=float
           ]
 c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(509): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(618): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(648): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(651): warning C4244: 'initialisation' : conversion de 'T' en 'int', perte possible de données
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(602): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(632): warning C4018: '<' : incompatibilité signed/unsigned
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(635): warning C4244: 'initialisation' : conversion de 'T' en 'int', perte possible de données
           with
           [
               T=float
           ]
-c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(693): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+c:\users\allou\desktop\esgiwork\cplusplus\pa\spaceinvaderjm\spaceinvaderjm\game.cpp(677): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
           with
           [
               T=float
