@@ -28,7 +28,7 @@ public:
 	//Alien Gestion
 	void initListAliens(std::vector<Alien>& listAlien, sf::Texture& texture, std::string alienImagePath);
 	
-	void aleaAliensMove(std::vector<Alien>& listAlien);
+	void aleaAliensMove(std::vector<Entity>& enemies);
 	void alienShoot(std::vector<Alien>& aliens, std::vector<Bullet>& alienBullet);
 
 	//Wall Gestion
@@ -71,6 +71,12 @@ private:
 	sf::Image imageExplosion;
 	sf::Image imageWall;
 	sf::Image imageShip;
+
+
+	sf::Image imageAlien;
+	sf::Image imageAlien2;
+	sf::Image imageAlien3;
+	sf::Image imageAlien4;
 
 
 

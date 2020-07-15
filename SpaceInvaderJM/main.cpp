@@ -9,7 +9,7 @@ int main()
 {
 
 	//On parametre la résolution
-	Game game(1000, 600);
+	Game game(WIDTH, HEIGHT);
 
 	//Lancement du jeu.
 	return game.mainloop();
